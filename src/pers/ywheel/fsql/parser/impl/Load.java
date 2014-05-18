@@ -1,4 +1,4 @@
-package pers.ywheel.fsql.parser.imp;
+package pers.ywheel.fsql.parser.impl;
 
 import java.util.*;
 import java.io.*;
@@ -132,6 +132,8 @@ public class Load implements Parser {
 		    		} catch (NumberFormatException e2) {
 		    			type[i] = ColumnType.String;
 		    		}
+    			} catch (Exception e) {
+    				System.out.println(e.getMessage());
     			}
     		}
     	}

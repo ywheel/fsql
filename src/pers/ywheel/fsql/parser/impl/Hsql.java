@@ -1,4 +1,4 @@
-package pers.ywheel.fsql.parser.imp;
+package pers.ywheel.fsql.parser.impl;
 
 import pers.ywheel.fsql.dao.DAO;
 import pers.ywheel.fsql.parser.Parser;

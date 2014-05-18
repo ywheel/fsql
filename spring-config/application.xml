@@ -13,7 +13,7 @@
     
     <!-- PARSER -->
     
-    <bean id="parserSelector" class="pers.ywheel.fsql.parser.imp.ParserSelector">
+    <bean id="parserSelector" class="pers.ywheel.fsql.parser.impl.ParserSelector">
     	<constructor-arg index="0">
     	    <map>
     	    	<entry key="help" value-ref="helpParser" />
@@ -25,14 +25,14 @@
     	</constructor-arg>
     </bean>
     
-    <bean id="helpParser" class="pers.ywheel.fsql.parser.imp.Help" />
-    <bean id="quitParser" class="pers.ywheel.fsql.parser.imp.Quit" />
-    <bean id="loadParser" class="pers.ywheel.fsql.parser.imp.Load">
+    <bean id="helpParser" class="pers.ywheel.fsql.parser.impl.Help" />
+    <bean id="quitParser" class="pers.ywheel.fsql.parser.impl.Quit" />
+    <bean id="loadParser" class="pers.ywheel.fsql.parser.impl.Load">
         <constructor-arg index="0">
             <ref bean="jdbcDAO" />
         </constructor-arg>
     </bean>
-    <bean id="hsqlParser" class="pers.ywheel.fsql.parser.imp.Hsql" scope="singleton">
+    <bean id="hsqlParser" class="pers.ywheel.fsql.parser.impl.Hsql" scope="singleton">
         <constructor-arg index="0">
             <ref bean="jdbcDAO" />
         </constructor-arg>
@@ -54,5 +54,5 @@
         <property name="password" value=""/>
     </bean>
     
-    <bean id="jdbcDAO" class="pers.ywheel.fsql.dao.imp.JdbcDAO" parent="dao" scope="singleton"/>
+    <bean id="jdbcDAO" class="pers.ywheel.fsql.dao.impl.JdbcDAO" parent="dao" scope="singleton"/>
 </beans>

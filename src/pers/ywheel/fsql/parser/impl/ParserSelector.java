@@ -1,4 +1,4 @@
-package pers.ywheel.fsql.parser.imp;
+package pers.ywheel.fsql.parser.impl;
 
 import java.util.Map;
 

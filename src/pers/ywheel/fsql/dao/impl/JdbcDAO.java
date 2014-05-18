@@ -1,4 +1,4 @@
-package pers.ywheel.fsql.dao.imp;
+package pers.ywheel.fsql.dao.impl;
 
 import java.util.List;
 import java.util.ArrayList;
