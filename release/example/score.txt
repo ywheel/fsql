@@ -1,0 +1,13 @@
+Name	Subject	Score
+Jim	C	90
+Jim	Java	95
+Jim	Python	80
+Jim	Perl	87
+Jim	Ruby	86
+Jim	PHP	77
+Tom	C	91
+Tom	Java	85
+Tom	Python	83
+Tom	Perl	81
+Tom	Ruby	89
+Tom	PHP	94
