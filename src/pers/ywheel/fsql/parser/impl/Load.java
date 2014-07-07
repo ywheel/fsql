@@ -122,19 +122,33 @@ public class Load implements Parser {
     	ColumnType[] type = new ColumnType[columnName.length];
     	for (; index<rowData.size(); index++) {
     		for (int i=0; i<type.length; i++) {
-	    		try {
-	    			Integer.parseInt(rowData.get(index)[i]);
-	    			type[i] = ColumnType.Integer;
-	    		} catch (NumberFormatException e1) {
-	    			try {
+    			if (type[i] == null || type[i] == ColumnType.Integer) {
+    				// if type is integer, then should make sure can parse int
+    				// for the data in next raw, it maybe double type or string type
+		    		try {
+		    			Integer.parseInt(rowData.get(index)[i]);
+		    			type[i] = ColumnType.Integer;
+		    		} catch (NumberFormatException e1) {
+		    			try {
+			    			Double.parseDouble(rowData.get(index)[i]);
+			    			type[i] = ColumnType.Double;
+			    		} catch (NumberFormatException e2) {
+			    			type[i] = ColumnType.String;
+			    		}
+	    			} catch (Exception e) {
+	    				System.out.println(e.getMessage());
+	    			}
+    			} else if (type[i] == ColumnType.Double) {
+    				// if the type is double, then should make sure can parse double
+    				// for the data in next raw, it maybe string type
+    				try {
 		    			Double.parseDouble(rowData.get(index)[i]);
 		    			type[i] = ColumnType.Double;
 		    		} catch (NumberFormatException e2) {
 		    			type[i] = ColumnType.String;
 		    		}
-    			} catch (Exception e) {
-    				System.out.println(e.getMessage());
     			}
+    			// if the type is string, then it's really  string
     		}
     	}
     	
