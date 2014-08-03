@@ -11,7 +11,7 @@ import org.springframework.core.io.ClassPathResource;
  */
 public class FileSQL {
 	public static void main(String[] args) throws Exception {
-		BeanFactory factory  = new XmlBeanFactory(new ClassPathResource("application.xml"));
+		BeanFactory factory  = new XmlBeanFactory(new ClassPathResource("spring-config/application.xml"));
 		MainTask main = (MainTask) factory.getBean("main");
 		main.start();
 	}

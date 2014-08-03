@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ant build file -->
+<project name="FileSQL" default="release" basedir=".">
+  <!-- dependencies path -->
+  <path id="lib.jar.classpath">
+    <fileset file="${basedir}/lib/*.jar" />
+  </path>
+  <!-- Initialization target -->
+  <target name="clean">
+    <delete dir="${basedir}/release" />
+    <delete dir="${basedir}/classes" />
+  </target>
+  <target name="init" depends="clean">
+    <mkdir dir="${basedir}/release" />
+    <mkdir dir="${basedir}/release/configuration" />
+    <mkdir dir="${basedir}/release/configuration/spring-config" />
+    <mkdir dir="${basedir}/release/lib" />
+    <mkdir dir="${basedir}/release/dependencies" />
+    <mkdir dir="${basedir}/release/log" />
+    <mkdir dir="${basedir}/release/test-files" />
+    <mkdir dir="${basedir}/classes" />
+  </target>
+  <target name="compile" depends="init">
+    <javac srcdir="${basedir}/src" destdir="${basedir}/classes">
+      <classpath refid="lib.jar.classpath" />
+    </javac> 
+  </target>
+  <target name="copy">
+    <copy todir="${basedir}/release/configuration/spring-config">
+      <fileset dir="${basedir}/configuration/spring-config" includes="*.xml" />
+    </copy>
+    <copy todir="${basedir}/release/configuration">
+      <fileset dir="${basedir}/configuration/log4j" includes="log4j.properties" />
+    </copy>
+    <copy todir="${basedir}/release">
+      <fileset dir="${basedir}/script" />
+    </copy>
+    <copy todir="${basedir}/release/dependencies">
+      <fileset dir="${basedir}/lib" includes="*.jar" />
+    </copy>
+    <copy todir="${basedir}/release/test-files">
+      <fileset dir="${basedir}/test-files" />
+    </copy>
+  </target>
+  <target name="chmod" depends="init,copy">
+    <chmod perm="755" type="file">
+      <fileset dir="${basedir}/release" includes="fsql*" /> 
+    </chmod>
+     <chmod perm="777">
+       <dirset dir="${basedir}/release/log" />
+     </chmod>
+  </target>
+  <target name="release" depends="compile,copy,chmod">
+    <jar destfile="${basedir}/release/lib/fsql.jar" basedir="${basedir}/classes">
+      <manifest>
+        <attribute name="Main-class" value="pers.ywheel.fsql.FileSQL" />
+      </manifest>
+    </jar>
+  </target>
+</project>
